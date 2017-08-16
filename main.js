@@ -1,206 +1,166 @@
 window.onload = game;
-    var square = document.querySelectorAll('.square');
-    var wrapper = document.getElementById('wrapper');   
+var square = document.querySelectorAll('.square');
+var wrapper = document.getElementById('wrapper');   
+var reset = document.createElement('div');
+
+function game() { 
     var player1 = document.getElementById('player1');
     var player2 = document.getElementById('player2');
-    var reset = document.createElement('div');
-
-function game() {  
     player1.classList.add('active');
     for(var i = 0;i < square.length;i++)
-        {
-            square[i].addEventListener("click", pick);
-        }
+    {
+        square[i].addEventListener("click", pick);
+    }
 }
 
 function pick() {
-        if(player1.classList.contains('active'))
+    if(player1.classList.contains('active'))
+    {
+        if(!(this.classList.contains("fa-times") || this.classList.contains("fa-circle-o")))
         {
-           if(!(this.classList.contains("fa-times") || this.classList.contains("fa-circle-o")))
+            this.classList.add('fa-times');
+            this.classList.add('check');
+            if(checkWinner("fa-times"))
             {
-                this.classList.add('fa-times');
-                this.classList.add('check');
-                if(checkWinner("fa-times"))
-                    {
-                        setTimeout(function()
-                        {
-                            document.body.insertBefore(reset, wrapper);
-                            reset.classList.add('player1-won');
-                            reset.innerHTML = '<h1>PLAYER1 HAS WON!</h1>' + '<div class="again"><i class="fa fa-repeat" aria-hidden="true"></i><a href="#">AGAIN</a></div>';
-                            var player1Win = document.querySelector('.player1-won');
-                            wrapper.style.display = 'none';
-                            player1Win.style.display = 'block';
-                            var again = document.querySelector('.again');
-                            again.addEventListener('click', function(){
-                                for(var i=0;i<square.length;i++)
-                                    {
-                                        square[i].classList.remove('check');
-                                        square[i].classList.remove('fa-times');
-                                        square[i].classList.remove('fa-circle-o');
-                                    }
-                                var target = wrapper.children[0];
-                                wrapper.style.display = 'block';
-                                target.parentNode.removeChild(target);
-                                player1Win.classList.remove('player1-won');
-                                player1Win.style.display = 'none';
-                            });
-                        },300);
-                    }
-                else 
-                {
-                  checkTie();  
-                }
-                player2.classList.add('active');
-                player1.classList.remove('active');
+                winner('player1-won','PLAYER1 HAS WON');
             }
-        } 
-        else 
-        {
-           if(!(this.classList.contains("fa-circle-o") || this.classList.contains("fa-times")))
+            else 
             {
-                this.classList.add('fa-circle-o');
-                this.classList.add('check');
-                if(checkWinner("fa-circle-o"))
-                {   
-                    setTimeout(function() 
-                    {
-                        document.body.insertBefore(reset, wrapper);
-                        reset.classList.add('player2-won');
-                        reset.innerHTML = '<h1>PLAYER2 HAS WON!</h1>' +'<div class="again"><i class="fa fa-repeat" aria-hidden="true"></i><a href="#">AGAIN</a></div>';
-                        var player2Win = document.querySelector('.player2-won');
-                        wrapper.style.display = 'none';
-                        player2Win.style.display = 'block';
-                        var again = document.querySelector('.again');
-                        again.addEventListener('click', function(){
-                            for(var i=0;i<square.length;i++)
-                                {
-                                    square[i].classList.remove('check');
-                                    square[i].classList.remove('fa-times');
-                                    square[i].classList.remove('fa-circle-o');
-
-                                }
-                            var target = wrapper.children[0];
-                            wrapper.style.display = 'block';
-                            target.parentNode.removeChild(target);
-                            player2Win.classList.remove('player2-won');
-                            player2Win.style.display = 'none';
-                        });
-                    }, 300);
-                }
-                else 
-                {
-                    checkTie();
-                }
-                player1.classList.add('active');
-                player2.classList.remove('active');
+                checkTie();  
             }
+            player2.classList.add('active');
+            player1.classList.remove('active');
         }
+    } 
+    else 
+    {
+        if(!(this.classList.contains("fa-circle-o") || this.classList.contains("fa-times")))
+        {
+            this.classList.add('fa-circle-o');
+            this.classList.add('check');
+            if(checkWinner("fa-circle-o"))
+            {   
+                winner('player2-won','PLAYER2 HAS WON');
+            }
+            else 
+            {
+                checkTie();
+            }
+            player1.classList.add('active');
+            player2.classList.remove('active');
+        }
+    }
 }
 
 function checkWinner(symbol) {
-    var square1 = document.querySelector('.square1').classList.contains(symbol);
-    var square2 = document.querySelector('.square2').classList.contains(symbol);
-    var square3 = document.querySelector('.square3').classList.contains(symbol);
-    var square4 = document.querySelector('.square4').classList.contains(symbol);
-    var square5 = document.querySelector('.square5').classList.contains(symbol);
-    var square6 = document.querySelector('.square6').classList.contains(symbol);
-    var square7 = document.querySelector('.square7').classList.contains(symbol);
-    var square8 = document.querySelector('.square8').classList.contains(symbol);
-    var square9 = document.querySelector('.square9').classList.contains(symbol);
-    if(square1 && square2 && square3){
-        firstRow();
+    var square1 = document.querySelector('.square1');
+    var square2 = document.querySelector('.square2');
+    var square3 = document.querySelector('.square3');
+    var square4 = document.querySelector('.square4');
+    var square5 = document.querySelector('.square5');
+    var square6 = document.querySelector('.square6');
+    var square7 = document.querySelector('.square7');
+    var square8 = document.querySelector('.square8');
+    var square9 = document.querySelector('.square9');
+    var square1checking = document.querySelector('.square1').classList.contains(symbol);
+    var square2checking = document.querySelector('.square2').classList.contains(symbol);
+    var square3checking = document.querySelector('.square3').classList.contains(symbol);
+    var square4checking = document.querySelector('.square4').classList.contains(symbol);
+    var square5checking = document.querySelector('.square5').classList.contains(symbol);
+    var square6checking = document.querySelector('.square6').classList.contains(symbol);
+    var square7checking = document.querySelector('.square7').classList.contains(symbol);
+    var square8checking = document.querySelector('.square8').classList.contains(symbol);
+    var square9checking = document.querySelector('.square9').classList.contains(symbol);
+    if(square1checking && square2checking && square3checking)
+    {
+        square1.classList.add('win-active');
+        square2.classList.add('win-active');
+        square3.classList.add('win-active');
         return true;
     }
-    else if(square4 && square5 && square6)
+    else if(square4checking && square5checking && square6checking)
     {
-        secondRow();
+        square4.classList.add('win-active');
+        square5.classList.add('win-active');
+        square6.classList.add('win-active');
         return true;
     }
-    else if(square7 && square8 && square9)
+    else if(square7checking && square8checking && square9checking)
     {
-        thirdRow();
+        square7.classList.add('win-active');
+        square8.classList.add('win-active');
+        square9.classList.add('win-active');
+        return true;checking
+    }
+    else if (square1checking && square4checking && square7checking)
+    {
+        square1.classList.add('win-active');
+        square4.classList.add('win-active');
+        square7.classList.add('win-active');
         return true;
     }
-    else if (square1 && square4 && square7)
+    else if(square2checking && square5checking && square8checking)
     {
-        firstCol();
+        square2.classList.add('win-active');
+        square5.classList.add('win-active');
+        square8.classList.add('win-active');
         return true;
     }
-    else if(square2 && square5 && square8)
+    else if (square3checking && square6checking && square9checking)
     {
-        secondCol();
+        square3.classList.add('win-active');
+        square6.classList.add('win-active');
+        square9.classList.add('win-active');
         return true;
     }
-    else if (square3 && square6 && square9)
+    else if (square1checking && square5checking && square9checking)
     {
-        thirdCol();
+        square1.classList.add('win-active');
+        square5.classList.add('win-active');
+        square9.classList.add('win-active');
         return true;
     }
-    else if (square1 && square5 && square9)
+    else if (square3checking && square5checking && square7checking)
     {
-        backSlash();
-        return true;
-    }
-    else if (square3 && square5 && square7)
-    {
-        slash();
+        square3.classList.add('win-active');
+        square5.classList.add('win-active');
+        square7.classList.add('win-active');
         return true;
     }
     else {
         return false;
     }
-    
-}
 
-function firstRow() {
-    wrapper.insertAdjacentHTML("afterbegin", '<div class="first-row"></div>');
-}
-function secondRow() {
-    wrapper.insertAdjacentHTML("afterbegin", '<div class="second-row"></div>');
-}
-function thirdRow() {
-    wrapper.insertAdjacentHTML("afterbegin", '<div class="third-row"></div>');
-}
-function firstCol() {
-    wrapper.insertAdjacentHTML("afterbegin", '<div class="first-col"></div>');
-}
-function secondCol() {
-    wrapper.insertAdjacentHTML("afterbegin", '<div class="second-col"></div>');
-}
-function thirdCol() {
-    wrapper.insertAdjacentHTML("afterbegin", '<div class="third-col"></div>');
-}
-function backSlash() {
-    wrapper.insertAdjacentHTML("afterbegin", '<div class="back-slash"></div>');
-}
-function slash() {
-    wrapper.insertAdjacentHTML("afterbegin", '<div class="slash"></div>');
 }
 function checkTie() {
     var checkSquare = document.getElementsByClassName('check');
     if(checkSquare.length == 9)
-        {
-         setTimeout(function() 
-                {
-                    document.body.insertBefore(reset, wrapper);
-                    reset.classList.add('draw-game');
-                    reset.innerHTML = '<h1>IT\'S A TIE!</h1>' +'<div class="again"><i class="fa fa-repeat" aria-hidden="true"></i><a href="#">AGAIN</a></div>';
-                    var drawGame = document.querySelector('.draw-game');
-                    wrapper.style.display = 'none';
-                    drawGame.style.display = 'block';
-                    var again = document.querySelector('.again');
-                    again.addEventListener('click', function(){
-                        for(var i=0;i<square.length;i++)
-                            {
-                                square[i].classList.remove('check');
-                                square[i].classList.remove('fa-times');
-                                square[i].classList.remove('fa-circle-o');
+    {
+        winner('draw-game', 'It\'s a Tie!');
+    }
+}
+function winner(playerWinner, playerWinnerText) {
+    setTimeout(function() 
+               {
+        document.body.insertBefore(reset, wrapper);
+        reset.classList.add(playerWinner);
+        reset.innerHTML = '<h1>'+playerWinnerText+'</h1>' +'<div class="again"><i class="fa fa-repeat" aria-hidden="true"></i><a href="#">AGAIN</a></div>';
+        var player2Win = document.querySelector(`.${CSS.escape(playerWinner)}`);
+        wrapper.style.display = 'none';
+        player2Win.style.display = 'block';
+        var again = document.querySelector('.again');
+        again.addEventListener('click', function(){
+            for(var i=0;i<square.length;i++)
+            {
+                square[i].classList.remove('check');
+                square[i].classList.remove('fa-times');
+                square[i].classList.remove('fa-circle-o');
+                square[i].classList.remove('win-active');
 
-                            }
-                        wrapper.style.display = 'block';
-                        drawGame.classList.remove('draw-game');
-                        drawGame.style.display = 'none';
-                    });
-                }, 300);
-        }
+            }
+            wrapper.style.display = 'block';
+            player2Win.classList.remove(playerWinner);
+            player2Win.style.display = 'none';
+        });
+    }, 700);
 }
