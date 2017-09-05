@@ -183,7 +183,8 @@
 body {
   font-size: 16px;
   overflow: hidden;
-  text-align: center; }
+  text-align: center;
+  font-family: georgia, palatino, saramond, sans-serif; }
 
 #wrapper {
   overflow: hidden; }
