@@ -1,0 +1,36 @@
+//Mixins
+=abso-center($top, $left)
+    position: absolute
+    top: $top
+    left: $left
+    transform: translate(-$top,-$left)
+
+=animationBA($name)
+    $pseudoBA: before after
+    @for $i from 1 through 2
+        #{$name}
+            &:#{nth($pseudoBA,$i)} /* before and after */ 
+                content: ''
+                position: absolute
+                top: $border-for-animation-pos
+                left: $border-for-animation-pos
+                width: 0
+                height: 0
+                background: transparent
+                border: $border-for-animation
+                animation: outline#{$i} 0.7s ease-in-out forwards  
+                
+=media($max-width) 
+    @media screen and (max-width: $max-width) 
+        @content
+    
+=keyframes($name)
+    @-webkit-keyframes #{$name}
+        @content
+    @-moz-keyframes #{$name}
+        @content
+    @-ms-keyframes #{$name}
+        @content
+    @keyframes #{$name}
+        @content
+ 

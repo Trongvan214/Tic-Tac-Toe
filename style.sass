@@ -1,51 +1,6 @@
-//variable
-$board-width: 450px
-$board-height: 450px
-$row-width: $board-width
-$row-height: $board-height/3
-$square-width: $row-width/3
-$square-height: $row-height
-$border-for-animation: 5px solid transparent
-$border-for-animation-pos: -6px
-$player-padding: 10px
-$player-font-size: 30px
-$x-o-size: 60px
-$fantasy: fantasy
-//Mixins
-=abso-center($top, $left)
-    position: absolute
-    top: $top
-    left: $left
-    transform: translate(-$top,-$left)
-
-=animationBA($name)
-    $pseudoBA: before after
-    @for $i from 1 through 2
-        #{$name}
-            &:#{nth($pseudoBA,$i)} /* before and after */ 
-                content: ''
-                position: absolute
-                top: $border-for-animation-pos
-                left: $border-for-animation-pos
-                width: 0
-                height: 0
-                background: transparent
-                border: $border-for-animation
-                animation: outline#{$i} 0.7s ease-in-out forwards   
-
-=media($max-width) 
-    @media screen and (max-width: $max-width) 
-        @content
-    
-=keyframes($name)
-    @-webkit-keyframes #{$name}
-        @content
-    @-moz-keyframes #{$name}
-        @content
-    @-ms-keyframes #{$name}
-        @content
-    @keyframes #{$name}
-        @content
+//imports 
+@import 'partial/mixin'
+@import 'partial/variable'
 
 //keyframes animations 
 +keyframes(outline1)
@@ -257,15 +212,20 @@ $player-won-bg: (#d4e1f7,#e86122,#0dc1be)
 
 //max-width 425px media
 +media(425px) 
+    .overflow-clear
+        margin-top: 50px
     #board
         margin-top: 60px
-    #player1,#player2
-        padding: $player-padding*0.6
-        font-size: $player-font-size*0.4
     #player1
+        padding: $player-padding*0.6
         margin-left: 30px
+        & p
+            font-size: $player-font-size*0.8
     #player2   
+        padding: $player-padding*0.6
         margin-right: 30px
+        & p
+            font-size: $player-font-size*0.8
 
 +media(375px) 
     .X
@@ -292,7 +252,6 @@ $player-won-bg: (#d4e1f7,#e86122,#0dc1be)
     #player1,#player2
         margin-top: 40px
         padding: $player-padding*0.8
-        font-size: $player-font-size*0.8
 
     #player1
         margin-left: 40px
@@ -300,7 +259,24 @@ $player-won-bg: (#d4e1f7,#e86122,#0dc1be)
     #player2    
         margin-right: 40px
 
-    
++media(320px) 
+    .overflow-clear
+        margin-top: 60px
+    .row
+        width: $row-width*0.6
+        height: $row-height*0.6
+    .square
+        width: $square-width*0.6
+        height: $square-height*0.6
+
+    #player1,#player2
+        padding: $player-padding*0.8
+
+    #player1
+        margin-left: 15px
+
+    #player2    
+        margin-right: 15px
             
     
     

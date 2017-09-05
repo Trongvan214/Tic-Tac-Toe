@@ -373,18 +373,23 @@ body {
     padding: 8px;
     font-size: 24px; } }
 @media screen and (max-width: 425px) {
+  .overflow-clear {
+    margin-top: 50px; }
+
   #board {
     margin-top: 60px; }
 
-  #player1, #player2 {
-    padding: 6px;
-    font-size: 12px; }
-
   #player1 {
+    padding: 6px;
     margin-left: 30px; }
+    #player1 p {
+      font-size: 24px; }
 
   #player2 {
-    margin-right: 30px; } }
+    padding: 6px;
+    margin-right: 30px; }
+    #player2 p {
+      font-size: 24px; } }
 @media screen and (max-width: 375px) {
   .X:before {
     font-size: 36px; }
@@ -410,13 +415,32 @@ body {
 
   #player1, #player2 {
     margin-top: 40px;
-    padding: 8px;
-    font-size: 24px; }
+    padding: 8px; }
 
   #player1 {
     margin-left: 40px; }
 
   #player2 {
     margin-right: 40px; } }
+@media screen and (max-width: 320px) {
+  .overflow-clear {
+    margin-top: 60px; }
+
+  .row {
+    width: 270px;
+    height: 90px; }
+
+  .square {
+    width: 90px;
+    height: 90px; }
+
+  #player1, #player2 {
+    padding: 8px; }
+
+  #player1 {
+    margin-left: 15px; }
+
+  #player2 {
+    margin-right: 15px; } }
 
 /*# sourceMappingURL=style.css.map */
