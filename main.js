@@ -16,11 +16,11 @@ function game() {
 function pick() {
     if(player1.classList.contains('active'))
     {
-        if(!(this.classList.contains("fa-times") || this.classList.contains("fa-circle-o")))
+        if(!(this.classList.contains("X") || this.classList.contains("O")))
         {
-            this.classList.add('fa-times');
+            this.classList.add('X');
             this.classList.add('check');
-            if(checkWinner("fa-times"))
+            if(checkWinner("X"))
             {
                 winner('player1-won','PLAYER1 HAS WON');
             }
@@ -34,11 +34,11 @@ function pick() {
     } 
     else 
     {
-        if(!(this.classList.contains("fa-circle-o") || this.classList.contains("fa-times")))
+        if(!(this.classList.contains("O") || this.classList.contains("X")))
         {
-            this.classList.add('fa-circle-o');
+            this.classList.add('O');
             this.classList.add('check');
-            if(checkWinner("fa-circle-o"))
+            if(checkWinner("O"))
             {   
                 winner('player2-won','PLAYER2 HAS WON');
             }
@@ -144,7 +144,7 @@ function winner(playerWinner, playerWinnerText) {
                {
         document.body.insertBefore(reset, wrapper);
         reset.classList.add(playerWinner);
-        reset.innerHTML = '<h1>'+playerWinnerText+'</h1>' +'<div class="again"><i class="fa fa-repeat" aria-hidden="true"></i><a href="#">AGAIN</a></div>';
+        reset.innerHTML = '<div class="winner-box"><h1>'+playerWinnerText+'</h1>' +'<div class="again"><i class="fa fa-repeat" aria-hidden="true"></i><a href="#">AGAIN</a></div></div>';
         var player2Win = document.querySelector(`.${CSS.escape(playerWinner)}`);
         wrapper.style.display = 'none';
         player2Win.style.display = 'block';
@@ -153,8 +153,8 @@ function winner(playerWinner, playerWinnerText) {
             for(var i=0;i<square.length;i++)
             {
                 square[i].classList.remove('check');
-                square[i].classList.remove('fa-times');
-                square[i].classList.remove('fa-circle-o');
+                square[i].classList.remove('X');
+                square[i].classList.remove('O');
                 square[i].classList.remove('win-active');
 
             }

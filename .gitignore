@@ -1,0 +1,7 @@
+.sass-cache/*
+.eslintrc.js
+node_modules/*
+package.json
+.vscode/*
+*.map
+.eslintrc
