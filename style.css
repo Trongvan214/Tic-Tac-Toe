@@ -189,6 +189,9 @@ body {
 #wrapper {
   overflow: hidden; }
 
+.hide {
+  display: none !important; }
+
 #board {
   clear: both;
   margin: 50px auto;

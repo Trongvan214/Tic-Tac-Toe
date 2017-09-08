@@ -141,16 +141,19 @@ function checkTie() {
 }
 function winner(playerWinner, playerWinnerText) {
     setTimeout(function() 
-               {
-        document.body.insertBefore(reset, wrapper);
-        reset.classList.add(playerWinner);
-        reset.innerHTML = '<div class="winner-box"><h1>'+playerWinnerText+'</h1>' +'<div class="again"><i class="fa fa-repeat" aria-hidden="true"></i><a href="#">AGAIN</a></div></div>';
-        var player2Win = document.querySelector(`.${CSS.escape(playerWinner)}`);
-        wrapper.style.display = 'none';
-        player2Win.style.display = 'block';
+        {
+        var playerWinning = document.getElementById('player-winner');
+        // var player2Win = document.querySelector(`.${CSS.escape(playerWinner)}`);
+        playerWinning.classList.add(playerWinner)
+        playerWinning.classList.remove('hide');
+        document.querySelector('.winner-box h1').innerHTML = playerWinnerText;
+        // document.body.insertBefore(reset, wrapper);
+        // reset.classList.add(playerWinner);
+        // reset.innerHTML = '<div class="winner-box"><h1>'+playerWinnerText+'</h1>' +'<div class="again"><i class="fa fa-repeat" aria-hidden="true"></i><a href="#">AGAIN</a></div></div>';
+        wrapper.classList.add('hide');
         var again = document.querySelector('.again');
         again.addEventListener('click', function(){
-            for(var i=0;i<square.length;i++)
+                for(var i=0;i<square.length;i++)
             {
                 square[i].classList.remove('check');
                 square[i].classList.remove('X');
@@ -158,9 +161,9 @@ function winner(playerWinner, playerWinnerText) {
                 square[i].classList.remove('win-active');
 
             }
-            wrapper.style.display = 'block';
-            player2Win.classList.remove(playerWinner);
-            player2Win.style.display = 'none';
+            wrapper.classList.remove('hide');
+            playerWinning.classList.add('hide');
+            playerWinning.classList.remove(playerWinner);
         });
-    }, 700);
+    }, 300);
 }
